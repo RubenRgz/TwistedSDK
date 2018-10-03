@@ -1,6 +1,6 @@
 /************************************************************************/
 /**
-* @LC	  09/22/2018
+* @LC	  10/03/2018
 * @file   twPlatform.h
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   09/02/2018
@@ -37,11 +37,11 @@
 
 //Endianness
 #ifdef BIG_ENDIAN
-#define MEMORY_WORK_BG
+#define BIG_ENDIAN_USAGE
 #endif // BIG_ENDIAN
 
 #ifdef LITTLE_ENDIAN
-#define MEMORY_WORK_LE
+#define LITTLE_ENDIAN_USAGE
 #endif // LITTLE_ENDIAN
 
 //System

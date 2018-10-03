@@ -1,6 +1,6 @@
 /************************************************************************/
 /**
-* @LC	  09/22/2018
+* @LC	  10/03/2018
 * @file   twDataTypes.h
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   09/02/2018
@@ -36,6 +36,9 @@ typedef char				  ANSICHAR;		/*!< ANSI char normally is a signed type. */
 typedef wchar_t				  UNICHAR;		/*!< UNICODE normally is a unsigned type. */
 
 #else // 64 bits system
+
+constexpr auto MAX_UINT8 = 0xffffffff;
+constexpr auto MIN_UINT8 = 0x00000000;
 
 typedef unsigned char         tw_uint8;		/*!< 8-bit  unsigned. */
 typedef unsigned short int    tw_uint16;	/*!< 16-bit unsigned. */
