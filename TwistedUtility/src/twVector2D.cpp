@@ -1,4 +1,5 @@
 #include "twVector2D.h"
+#include <math.h>
 
 twVector2D::twVector2D(float _x, float _y)
 {
@@ -120,6 +121,14 @@ float twVector2D::DistanceFrom(const twVector2D& _vec)
 {
 	return sqrtf((this->x - _vec.x) * (this->x - _vec.x) +
 		(this->y - _vec.y) * (this->y - _vec.y));
+}
+
+bool twVector2D::isNormilized()
+{
+	if (sqrtf(x * x + y * y) == 1.f)
+		return true;
+
+	return false;
 }
 
 twVector2D twVector2D::ProjectOn(const twVector2D& _vec)
