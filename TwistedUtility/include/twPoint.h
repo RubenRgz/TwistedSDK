@@ -1,11 +1,11 @@
 /********************************************************************/
 /**
-* @LC	  09/23/2018
+* @LC	  10/03/2018
 * @file   Point.h
 * @Author Rubén Rodríguez Serrano (rubn2113@gmail.com)
 * @date   2017/10/16
 * @brief  It´s a simple 2D point
-* @bug	  No known bugs.
+* @bug	  No bugs known
 */
 /********************************************************************/
 #pragma once
@@ -39,6 +39,8 @@ public:
 	/* Operator overloading                                                 */
 	/************************************************************************/
 public:
+	void operator =	(const twPoint& _point);
+
 	bool operator == (const twPoint& _point) const;
 	bool operator != (const twPoint& _point) const;
 };

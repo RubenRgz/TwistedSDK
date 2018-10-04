@@ -14,14 +14,15 @@ twVector2D::twVector2D(const twVector2D & _vec)
 
 twVector2D::~twVector2D() {};
 
+void twVector2D::operator=(const twVector2D & _vec)
+{
+	this->x = _vec.x;
+	this->y = _vec.y;
+}
+
 twVector2D twVector2D::operator*(float _scalar) const
 {
 	return twVector2D(x * _scalar, y * _scalar);
-}
-
-twVector2D twVector2D::operator*(const twVector2D& _vec) const
-{
-	return twVector2D(x * _vec.x, y * _vec.y);
 }
 
 twVector2D twVector2D::operator+(const twVector2D& _vec) const

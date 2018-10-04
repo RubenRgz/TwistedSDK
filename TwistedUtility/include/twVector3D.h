@@ -5,7 +5,7 @@
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   09/02/2018
 * @brief  Vector class
-* @bug	  No know Bugs
+* @bug	 No bugs known
 */
 /************************************************************************/
 #pragma once
@@ -17,9 +17,9 @@
 
 class twVector3D
 {
-/************************************************************************/
-/* Constructors & destructor		                                    */
-/************************************************************************/
+	/************************************************************************/
+	/* Constructors & destructor		                                    */
+	/************************************************************************/
 public:
 	explicit twVector3D(float _x = 0.f, float _y = 0.f, float _z = 0.f);			/*!< Default constructor */
 	twVector3D(const twVector3D& _vec);												/*!< Object constructor */
@@ -58,8 +58,9 @@ public:
 	/* Operator overloading                                                 */
 	/************************************************************************/
 public:
+	void operator =	(const twVector3D& _vec);
+
 	twVector3D operator * (float _scalar) const;
-	twVector3D operator * (const twVector3D& _vec) const;
 	twVector3D operator + (const twVector3D& _vec) const;
 	twVector3D operator - (const twVector3D& _vec) const;
 

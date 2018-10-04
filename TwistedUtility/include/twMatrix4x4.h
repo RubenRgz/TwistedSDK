@@ -4,7 +4,7 @@
 * @file   twMatrix3x3.h
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   10/02/2018
-* @brief  Matrix 3x3 class
+* @brief  Matrix 4x4 class
 * @bug	  No bugs known
 */
 /************************************************************************/
@@ -13,23 +13,25 @@
 /************************************************************************/
 /* Includes											                    */
 /************************************************************************/
-#include "twVector3D.h"
+#include "twVector4D.h"
 
-class twMatrix3x3
+class twMatrix4x4
 {
 	/************************************************************************/
 	/* Constructors & destructor		                                    */
 	/************************************************************************/
 public:
-	explicit twMatrix3x3(float _m00 = 0.f, float _m01 = 0.f, float _m02 = 0.f,
-		float _m10 = 0.f, float _m11 = 0.f, float _m12 = 0.f,
-		float _m20 = 0.f, float _m21 = 0.f, float _m22 = 0.f);
+	explicit twMatrix4x4(float _m00 = 0.f, float _m01 = 0.f, float _m02 = 0.f, float _m03 = 0.f,
+						 float _m10 = 0.f, float _m11 = 0.f, float _m12 = 0.f, float _m13 = 0.f,
+						 float _m20 = 0.f, float _m21 = 0.f, float _m22 = 0.f, float _m23 = 0.f,
+						 float _m30 = 0.f, float _m31 = 0.f, float _m32 = 0.f, float _m33 = 0.f);
 
-	twMatrix3x3(const twVector3D& _vec1, const twVector3D& _vec2, const twVector3D& _vec3);
+	twMatrix4x4(const twVector4D& _vec1, const twVector4D& _vec2,
+				const twVector4D& _vec3, const twVector4D& _vec4);
 
-	twMatrix3x3(const twMatrix3x3& _matrix);
+	twMatrix4x4(const twMatrix4x4& _matrix);
 
-	~twMatrix3x3();
+	~twMatrix4x4();
 
 	/************************************************************************/
 	/* Variable declaration								                    */
@@ -39,13 +41,13 @@ public:
 	{
 		struct
 		{
-			float	m00, m01, m02,
-					m10, m11, m12,
-					m20, m21, m22;
+			float m00, m01, m02, m03,
+				  m10, m11, m12, m13,
+				  m20, m21, m22, m23,
+				  m30, m31, m32, m33;
 		};
-
-		float Line[3][3];
-		float fMatrix[9];
+		float Line[4][4];
+		float fMatrix[16];
 	};
 
 	/************************************************************************/
@@ -63,13 +65,15 @@ public:
 	/* Operator overloading                                                 */
 	/************************************************************************/
 public:
-	void operator=          (const twMatrix3x3& _matrix);							/*!< Matrix assignation */
-	
-	bool operator==			(const twMatrix3x3& _matrix);							/*!< Positive comparison */
-	bool operator!=			(const twMatrix3x3& _matrix);							/*!< Negative comparison */
+	void operator=          (const twMatrix4x4& _matrix);							/*!< Matrix assignation */
 
-	twMatrix3x3 operator+	(const twMatrix3x3& _matrix);							/*!< Matrix addition */
-	twMatrix3x3 operator-	(const twMatrix3x3& _matrix);							/*!< Matrix substraction */
-	twMatrix3x3 operator*	(const twMatrix3x3& _matrix);							/*!< Matrix multiplication */
-	twMatrix3x3 operator*	(float _scalar);										/*!< Scalar multiplication */
+	bool operator==			(const twMatrix4x4& _matrix);							/*!< Positive comparison */
+	bool operator!=			(const twMatrix4x4& _matrix);							/*!< Negative comparison */
+
+	twMatrix4x4 operator+	(const twMatrix4x4& _matrix);							/*!< Matrix addition */
+	twMatrix4x4 operator-	(const twMatrix4x4& _matrix);							/*!< Matrix substraction */
+	twMatrix4x4 operator*	(const twMatrix4x4& _matrix);							/*!< Matrix multiplication */
+	twMatrix4x4 operator*	(float _scalar);										/*!< Scalar multiplication */
+
 };
+

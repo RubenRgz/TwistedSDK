@@ -200,13 +200,14 @@ twMatrix3x3 twMatrix3x3::operator-(const twMatrix3x3 & _matrix)
 twMatrix3x3 twMatrix3x3::operator*(const twMatrix3x3 & _matrix)
 {
 	twMatrix3x3 tempMatrixMultiplication;
-	for (tw_uint32 i = 0; i < 3; i++)
+
+	for (tw_uint32 i = 0; i < 3; ++i)
 	{
-		for (tw_uint32 j = 0; j < 3; j++)
+		for (tw_uint32 j = 0; j < 3; ++j)
 		{
-			for (tw_uint32 k = 0; k < 3; k++)
+			for (tw_uint32 k = 0; k < 3; ++k)
 			{
-				tempMatrixMultiplication.Line[i][j] += (Line[i][k] * tempMatrixMultiplication.Line[k][j]);
+				tempMatrixMultiplication.Line[i][j] += (Line[i][k] * _matrix.Line[k][j]);
 			}
 		}
 	}

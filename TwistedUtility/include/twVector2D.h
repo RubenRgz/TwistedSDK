@@ -5,7 +5,7 @@
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   09/02/2018
 * @brief  Vector class
-* @bug	  No know Bugs
+* @bug	  No bugs known
 */
 /************************************************************************/
 #pragma once
@@ -18,7 +18,8 @@ enum VectorDirection
 	VD_UP = 0,
 	VD_DOWN,
 	VD_RIGHT,
-	VD_LEFT
+	VD_LEFT,
+	VD_TOTAL
 };
 
 class twVector2D
@@ -67,8 +68,9 @@ public:
 	/* Operator overloading                                                 */
 	/************************************************************************/
 public:
+	void operator =	(const twVector2D& _vec);
+
 	twVector2D operator * (float _scalar) const;
-	twVector2D operator * (const twVector2D& _vec) const;
 	twVector2D operator + (const twVector2D& _vec) const;
 	twVector2D operator - (const twVector2D& _vec) const;
 };

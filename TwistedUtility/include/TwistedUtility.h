@@ -9,5 +9,6 @@
 //Math
 #include"twPoint.h"
 #include "twVector2D.h"
+#include "twVector3D.h"
 #include "twMatrix3x3.h"
 

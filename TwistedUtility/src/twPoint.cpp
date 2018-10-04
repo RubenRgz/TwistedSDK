@@ -13,6 +13,12 @@ twPoint::twPoint(const twPoint & _point)
 
 twPoint::~twPoint(){}
 
+void twPoint::operator=(const twPoint & _point)
+{
+	this->x = _point.x;
+	this->y = _point.y;
+}
+
 bool twPoint::operator==(const twPoint & _point) const
 {
 	if (x == _point.x && y == _point.y)

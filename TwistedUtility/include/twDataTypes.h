@@ -5,7 +5,7 @@
 * @Author Ruben Rodriguez (rubn2113@gmail.com)
 * @date   09/02/2018
 * @brief  Set the platform type
-* @bug	  No know Bugs
+* @bug	  No bugs known
 */
 /************************************************************************/
 #pragma once

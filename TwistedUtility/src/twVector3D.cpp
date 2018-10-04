@@ -19,14 +19,16 @@ twVector3D::~twVector3D()
 {
 }
 
+void twVector3D::operator=(const twVector3D & _vec)
+{
+	this->x = _vec.x;
+	this->y = _vec.y;
+	this->z = _vec.z;
+}
+
 twVector3D twVector3D::operator*(float _scalar) const
 {
 	return twVector3D(x * _scalar, y * _scalar, z * _scalar);
-}
-
-twVector3D twVector3D::operator*(const twVector3D & _vec) const
-{
-	return twVector3D(x * _vec.x, y * _vec.y, z * _vec.z);
 }
 
 twVector3D twVector3D::operator+(const twVector3D & _vec) const
