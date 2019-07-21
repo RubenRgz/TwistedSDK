@@ -1,38 +1,115 @@
 #include "twPoint.h"
 
-twPoint::twPoint(const tw_int32& _x, const tw_int32& _y)
+namespace TwistedSDK
 {
-	x = _x;
-	y = _y;
-}
-
-twPoint::twPoint(const twPoint & _point)
-{
-	*this = _point;
-}
-
-twPoint::~twPoint(){}
-
-void twPoint::operator=(const twPoint & _point)
-{
-	this->x = _point.x;
-	this->y = _point.y;
-}
-
-bool twPoint::operator==(const twPoint & _point) const
-{
-	if (x == _point.x && y == _point.y)
+	twPoint::twPoint(float _x = 0.f, float _y = 0.f)
 	{
-		return true;
+		this->x = _x;
+		this->y = _y;
 	}
-	return false;
-}
 
-bool twPoint::operator!=(const twPoint & _point) const
-{
-	if (x != _point.x || y != _point.y)
+	twPoint::twPoint(const twPoint & _point)
 	{
-		return true;
+		*this = _point;
 	}
-	return false;
+
+	twPoint::twPoint()
+	{
+		this->x = 0.f;
+		this->y = 0.f;
+	}
+
+	twPoint::~twPoint() {}
+
+	void twPoint::operator=(const twPoint & _point)
+	{
+		this->x = _point.x;
+		this->y = _point.y;
+	}
+
+	void twPoint::operator+=(const twPoint & _point)
+	{
+		this->x += _point.x;
+		this->y += _point.y;
+	}
+
+	void twPoint::operator-=(const twPoint & _point)
+	{
+		this->x -= _point.x;
+		this->y -= _point.y;
+	}
+
+	void twPoint::operator*=(const twPoint & _point)
+	{
+		this->x *= _point.x;
+		this->y *= _point.y;
+	}
+
+	void twPoint::operator/=(const twPoint & _point)
+	{
+		this->x /= _point.x;
+		this->y /= _point.y;
+	}
+
+	void twPoint::operator+=(float _value)
+	{
+		this->x += _value;
+		this->y += _value;
+	}
+
+	void twPoint::operator-=(float _value)
+	{
+		this->x -= _value;
+		this->y -= _value;
+	}
+
+	void twPoint::operator*=(float _value)
+	{
+		this->x *= _value;
+		this->y *= _value;
+	}
+
+	void twPoint::operator/=(float _value)
+	{
+		this->x /= _value;
+		this->y /= _value;
+	}
+
+	bool twPoint::operator==(const twPoint & _point) const
+	{
+		if (this->x == _point.x && this->y == _point.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool twPoint::operator!=(const twPoint & _point) const
+	{
+		if (this->x != _point.x || this->y != _point.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	twPoint twPoint::operator+(const twPoint & _point) const
+	{
+		return twPoint(this->x + _point.x, this->y + _point.y);
+	}
+
+	twPoint twPoint::operator-(const twPoint & _point) const
+	{
+		return twPoint(this->x - _point.x, this->y - _point.y);
+	}
+
+	twPoint twPoint::operator*(const twPoint & _point) const
+	{
+		return twPoint(this->x * _point.x, this->y * _point.y);
+	}
+
+	twPoint twPoint::operator/(const twPoint & _point) const
+	{
+		return twPoint(this->x / _point.x, this->y / _point.y);
+	}
 }

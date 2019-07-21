@@ -1,48 +1,60 @@
-/********************************************************************/
+/************************************************************************************/
 /**
-* @LC	  10/03/2018
+* @LC	  20/07/2019
 * @file   Point.h
 * @Author Rubén Rodríguez Serrano (rubn2113@gmail.com)
 * @date   2017/10/16
 * @brief  It´s a simple 2D point
 * @bug	  No bugs known
 */
-/********************************************************************/
+/************************************************************************************/
 #pragma once
 
-/************************************************************************/
-/* Includes											                    */
-/************************************************************************/
-#include <twDataTypes.h>
-
-/************************************************************************/
-/* Point Class											                */
-/************************************************************************/
-class twPoint
+namespace TwistedSDK
 {
-	/************************************************************************/
-	/* Constructors & destructor		                                    */
-	/************************************************************************/
-public:
-	explicit twPoint(const tw_int32& _x = 0, const tw_int32& _y = 0);				/*!< Constructor with variables */
-	twPoint(const twPoint& _point);													/*!< Constructor with Point */
-	~twPoint();																		/*!< Destructor */
+	/********************************************************************************/
+	/* Point Class											                        */
+	/********************************************************************************/
+	class twPoint
+	{
+		/****************************************************************************/
+		/* Constructors & destructor		                                        */
+		/****************************************************************************/
+	public:
+		explicit twPoint(float _x = 0.f, float _y = 0.f);	/*!< Constructor with variables */
+		twPoint(const twPoint& _point);						/*!< Constructor with a point */
+		twPoint();											/*!< Default constructor */
+		~twPoint();											/*!< Destructor */
 
-	/************************************************************************/
-	/* Variable declaration								                    */
-	/************************************************************************/
-public:
-	tw_int32 x;																		/*!< X value of the point */
-	tw_int32 y;																		/*!< Y value of the point */
+		/****************************************************************************/
+		/* Variable declaration								                        */
+		/****************************************************************************/
+	public:
+		float x;											/*!< X coordinate */
+		float y;											/*!< Y coordinate */
 
-	/************************************************************************/
-	/* Operator overloading                                                 */
-	/************************************************************************/
-public:
-	void operator =	(const twPoint& _point);
+		/****************************************************************************/
+		/* Operator overloading                                                     */
+		/****************************************************************************/
+	public:
+		void operator =	(const twPoint& _point);
+		void operator += (const twPoint& _point);
+		void operator -= (const twPoint& _point);
+		void operator *= (const twPoint& _point);
+		void operator /= (const twPoint& _point);
+		void operator += (float _value);
+		void operator -= (float _value);
+		void operator *= (float _value);
+		void operator /= (float _value);
 
-	bool operator == (const twPoint& _point) const;
-	bool operator != (const twPoint& _point) const;
-};
+		bool operator == (const twPoint& _point) const;
+		bool operator != (const twPoint& _point) const;
+
+		twPoint operator + (const twPoint& _point) const;
+		twPoint operator - (const twPoint& _point) const;
+		twPoint operator * (const twPoint& _point) const;
+		twPoint operator / (const twPoint& _point) const;
+	};
+}
 
 

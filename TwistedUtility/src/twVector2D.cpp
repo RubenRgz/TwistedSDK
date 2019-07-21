@@ -1,142 +1,172 @@
 #include "twVector2D.h"
 #include <math.h>
 
-twVector2D::twVector2D(float _x, float _y)
+namespace TwistedSDK
 {
-	x = _x;
-	y = _y;
-}
-
-twVector2D::twVector2D(const twVector2D & _vec)
-{
-	*this = _vec;
-}
-
-twVector2D::~twVector2D() {};
-
-void twVector2D::operator=(const twVector2D & _vec)
-{
-	this->x = _vec.x;
-	this->y = _vec.y;
-}
-
-twVector2D twVector2D::operator*(float _scalar) const
-{
-	return twVector2D(x * _scalar, y * _scalar);
-}
-
-twVector2D twVector2D::operator+(const twVector2D& _vec) const
-{
-	return twVector2D(x + _vec.x, y + _vec.y);
-}
-
-twVector2D twVector2D::operator-(const twVector2D& _vec) const
-{
-	return twVector2D(x - _vec.x, y - _vec.y);
-}
-
-void twVector2D::SetDirection(const VectorDirection& _direction)
-{
-	switch (_direction)
+	twVector2D::twVector2D(float _x = 0.f, float _y = 0.f)
 	{
-	case VD_UP:
-		x = 0.f;
-		y = 1.f;
-		break;
-	case VD_DOWN:
-		x = 0.f;
-		y = -1.f;
-		break;
-	case VD_RIGHT:
-		x = 1.f;
-		y = 0.f;
-		break;
-	case VD_LEFT:
-		x = -1.f;
-		y = 0.f;
-		break;
-	default:
-		break;
+		this->x = _x;
+		this->y = _y;
 	}
-}
 
-void twVector2D::Rotate(float _angle)
-{
-	float xt = (x * cosf(_angle)) - (y * sinf(_angle));
-	float yt = (y * cosf(_angle)) + (x * sinf(_angle));
-	x = xt;
-	y = yt;
-}
+	twVector2D::twVector2D(const twVector2D & _vec)
+	{
+		*this = _vec;
+	}
 
-float twVector2D::CrossProduct(const twVector2D& _vec) const
-{
-	return (this->x * _vec.y) - (this->y * _vec.x);
-}
+	twVector2D::twVector2D()
+	{
+		this->x = 0.f;
+		this->y = 0.f;
+	}
 
-float twVector2D::Magnitude()
-{
-	return sqrtf(x * x + y * y);
-}
+	twVector2D::~twVector2D() {};
 
-void twVector2D::Normalize()
-{
-	float mag = this->Magnitude();
-	this->x = x / mag;
-	this->y = y / mag;
-}
+	const twVector2D twVector2D::ZERO = twVector2D(0.f, 0.f);
+	const twVector2D twVector2D::UP = twVector2D(0.f, 1.f);
+	const twVector2D twVector2D::RIGHT = twVector2D(1.f, 0.f);
+	const twVector2D twVector2D::LEFT = twVector2D(-1.f, 0.f);
+	const twVector2D twVector2D::DOWN = twVector2D(0.f, -1.f);
 
-float twVector2D::DotProduct(const twVector2D& _vec) const
-{
-	return (x * _vec.x) + (y * _vec.y);
-}
+	void twVector2D::Normalize()
+	{
+		float tempMagnitude = this->Magnitude();
+		this->x /= tempMagnitude;
+		this->y /= tempMagnitude;
+	}
 
-void twVector2D::Truncate(float _max)
-{
-	float i;
+	void twVector2D::Truncate(float _maxValue)
+	{
+		float i = _maxValue / this->Magnitude();
+		i = i < 1.f ? i : _maxValue;
 
-	i = _max / this->Magnitude();
-	i = i < 1.f ? i : _max;
+		this->x *= i;
+		this->y *= i;
+	}
 
-	this->x *= i;
-	this->y *= i;
-}
+	void twVector2D::Rotate(float _angle)
+	{
+		this->x = (this->x * cosf(_angle)) - (this->y * sinf(_angle));
+		this->y = (this->y * cosf(_angle)) + (this->x * sinf(_angle));
+	}
 
-float twVector2D::GetAngle()
-{
-	return static_cast<float>(atan2(this->y, this->x));
-}
+	void twVector2D::Zero()
+	{
+		x = 0.f;
+		y = 0.f;
+	}
 
-void twVector2D::ScaleBy(float _scale)
-{
-	this->x *= _scale;
-	this->y *= _scale;
-}
+	float twVector2D::Magnitude()
+	{
+		return sqrtf(this->x * this->x + this->y * this->y);
+	}
 
-void twVector2D::Zero()
-{
-	x = 0.f;
-	y = 0.f;
-}
+	float twVector2D::GetAngle()
+	{
+		return static_cast<float>(atan2(this->y, this->x));
+	}
 
-float twVector2D::DistanceFrom(const twVector2D& _vec)
-{
-	return sqrtf((this->x - _vec.x) * (this->x - _vec.x) +
-		(this->y - _vec.y) * (this->y - _vec.y));
-}
+	float twVector2D::DistanceFrom(const twVector2D& _vec)
+	{
+		return sqrtf((this->x - _vec.x) * (this->x - _vec.x) +
+			(this->y - _vec.y) * (this->y - _vec.y));
+	}
 
-bool twVector2D::isNormilized()
-{
-	if (sqrtf(x * x + y * y) == 1.f)
-		return true;
+	float twVector2D::DotProduct(const twVector2D& _vec) const
+	{
+		return (this->x * _vec.x) + (this->y * _vec.y);
+	}
 
-	return false;
-}
+	float twVector2D::CrossProduct(const twVector2D& _vec) const
+	{
+		return (this->x * _vec.y) - (this->y * _vec.x);
+	}
 
-twVector2D twVector2D::ProjectOn(const twVector2D& _vec)
-{
-	float result = this->DotProduct(_vec);
-	float mag = sqrtf(_vec.x * _vec.x + _vec.y * _vec.y);
-	result = result / (mag * mag);
+	bool twVector2D::isNormilized()
+	{
+		float tempMagnitude = this->Magnitude();
+		if (this->x / tempMagnitude == 1.f && this->y / tempMagnitude == 1.f)
+		{
+			return true;
+		}
+		return false;
+	}
 
-	return twVector2D(_vec.x * result, _vec.y * result);
+	twVector2D twVector2D::ProjectOn(const twVector2D& _vec)
+	{
+		float tempResult = this->DotProduct(_vec);
+		float tempMagnitude = const_cast<twVector2D &>(_vec).Magnitude();
+		tempResult /= tempMagnitude * tempMagnitude;
+
+		return twVector2D(_vec.x * tempResult, _vec.y * tempResult);
+	}
+
+	void twVector2D::operator=(const twVector2D & _vec)
+	{
+		this->x = _vec.x;
+		this->y = _vec.y;
+	}
+
+	void twVector2D::operator+=(const twVector2D & _vec)
+	{
+		this->x += _vec.x;
+		this->y += _vec.y;
+	}
+
+	void twVector2D::operator-=(const twVector2D & _vec)
+	{
+		this->x -= _vec.x;
+		this->y -= _vec.y;
+	}
+
+	void twVector2D::operator*=(float _scalar)
+	{
+		this->x *= _scalar;
+		this->y *= _scalar;
+	}
+
+	void twVector2D::operator+=(float _scalar)
+	{
+		this->x += _scalar;
+		this->y += _scalar;
+	}
+
+	void twVector2D::operator-=(float _scalar)
+	{
+		this->x -= _scalar;
+		this->y -= _scalar;
+	}
+
+	bool twVector2D::operator==(const twVector2D & _vec) const
+	{
+		if (this->x == _vec.x && this->y == _vec.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool twVector2D::operator!=(const twVector2D & _vec) const
+	{
+		if (this->x != _vec.x || this->y != _vec.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	twVector2D twVector2D::operator+(const twVector2D& _vec) const
+	{
+		return twVector2D(this->x + _vec.x, this->y + _vec.y);
+	}
+
+	twVector2D twVector2D::operator-(const twVector2D& _vec) const
+	{
+		return twVector2D(this->x - _vec.x, this->y - _vec.y);
+	}
+
+	twVector2D twVector2D::operator*(float _scalar) const
+	{
+		return twVector2D(this->x * _scalar, this->y * _scalar);
+	}
 }
