@@ -8,3 +8,6 @@
 *.log
 *.pch
 *.idb
+*.vcxproj
+*.filters
+*.user

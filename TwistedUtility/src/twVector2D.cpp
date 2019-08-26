@@ -3,10 +3,16 @@
 
 namespace TwistedSDK
 {
-	twVector2D::twVector2D(float _x = 0.f, float _y = 0.f)
+	twVector2D::twVector2D(float _x, float _y)
 	{
 		this->x = _x;
 		this->y = _y;
+	}
+
+	twVector2D::twVector2D(float _scalar)
+	{
+		this->x = _scalar;
+		this->y = _scalar;
 	}
 
 	twVector2D::twVector2D(const twVector2D & _vec)
@@ -20,7 +26,9 @@ namespace TwistedSDK
 		this->y = 0.f;
 	}
 
-	twVector2D::~twVector2D() {};
+	twVector2D::~twVector2D() 
+	{
+	}
 
 	const twVector2D twVector2D::ZERO = twVector2D(0.f, 0.f);
 	const twVector2D twVector2D::UP = twVector2D(0.f, 1.f);
@@ -52,8 +60,8 @@ namespace TwistedSDK
 
 	void twVector2D::Zero()
 	{
-		x = 0.f;
-		y = 0.f;
+		this->x = 0.f;
+		this->y = 0.f;
 	}
 
 	float twVector2D::Magnitude()
@@ -69,7 +77,7 @@ namespace TwistedSDK
 	float twVector2D::DistanceFrom(const twVector2D& _vec)
 	{
 		return sqrtf((this->x - _vec.x) * (this->x - _vec.x) +
-			(this->y - _vec.y) * (this->y - _vec.y));
+					 (this->y - _vec.y) * (this->y - _vec.y));
 	}
 
 	float twVector2D::DotProduct(const twVector2D& _vec) const
@@ -77,22 +85,19 @@ namespace TwistedSDK
 		return (this->x * _vec.x) + (this->y * _vec.y);
 	}
 
-	float twVector2D::CrossProduct(const twVector2D& _vec) const
+	twVector2D twVector2D::CrossProduct(const twVector2D& _vec) const
 	{
-		return (this->x * _vec.y) - (this->y * _vec.x);
+		return twVector2D(-_vec.y, _vec.x);
 	}
 
 	bool twVector2D::isNormilized()
 	{
 		float tempMagnitude = this->Magnitude();
-		if (this->x / tempMagnitude == 1.f && this->y / tempMagnitude == 1.f)
-		{
-			return true;
-		}
-		return false;
+		return (this->x / tempMagnitude == 1.f &&
+				this->y / tempMagnitude == 1.f ? true : false);
 	}
 
-	twVector2D twVector2D::ProjectOn(const twVector2D& _vec)
+	twVector2D twVector2D::ProjectOn(const twVector2D& _vec) const
 	{
 		float tempResult = this->DotProduct(_vec);
 		float tempMagnitude = const_cast<twVector2D &>(_vec).Magnitude();
@@ -139,20 +144,12 @@ namespace TwistedSDK
 
 	bool twVector2D::operator==(const twVector2D & _vec) const
 	{
-		if (this->x == _vec.x && this->y == _vec.y)
-		{
-			return true;
-		}
-		return false;
+		return (this->x == _vec.x && this->y == _vec.y ? true : false);
 	}
 
 	bool twVector2D::operator!=(const twVector2D & _vec) const
 	{
-		if (this->x != _vec.x || this->y != _vec.y)
-		{
-			return true;
-		}
-		return false;
+		return (this->x != _vec.x || this->y != _vec.y ? true : false);
 	}
 
 	twVector2D twVector2D::operator+(const twVector2D& _vec) const

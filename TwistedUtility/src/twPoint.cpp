@@ -2,10 +2,16 @@
 
 namespace TwistedSDK
 {
-	twPoint::twPoint(float _x = 0.f, float _y = 0.f)
+	twPoint::twPoint(float _x, float _y)
 	{
 		this->x = _x;
 		this->y = _y;
+	}
+
+	twPoint::twPoint(float _value)
+	{
+		this->x = _value;
+		this->y = _value;
 	}
 
 	twPoint::twPoint(const twPoint & _point)
@@ -77,20 +83,12 @@ namespace TwistedSDK
 
 	bool twPoint::operator==(const twPoint & _point) const
 	{
-		if (this->x == _point.x && this->y == _point.y)
-		{
-			return true;
-		}
-		return false;
+		return (this->x == _point.x && this->y == _point.y ? true : false);
 	}
 
 	bool twPoint::operator!=(const twPoint & _point) const
 	{
-		if (this->x != _point.x || this->y != _point.y)
-		{
-			return true;
-		}
-		return false;
+		return (this->x != _point.x || this->y != _point.y ? true : false);
 	}
 
 	twPoint twPoint::operator+(const twPoint & _point) const

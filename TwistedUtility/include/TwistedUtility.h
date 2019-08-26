@@ -11,4 +11,6 @@
 #include "twVector2D.h"
 #include "twVector3D.h"
 #include "twMatrix3x3.h"
+#include "twDegrees.h"
+#include "twRadians.h"
 

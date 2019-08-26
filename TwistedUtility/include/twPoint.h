@@ -1,6 +1,6 @@
 /************************************************************************************/
 /**
-* @LC	  20/07/2019
+* @LC	  31/07/2019
 * @file   Point.h
 * @Author Rubén Rodríguez Serrano (rubn2113@gmail.com)
 * @date   2017/10/16
@@ -21,7 +21,8 @@ namespace TwistedSDK
 		/* Constructors & destructor		                                        */
 		/****************************************************************************/
 	public:
-		explicit twPoint(float _x = 0.f, float _y = 0.f);	/*!< Constructor with variables */
+		explicit twPoint(float _x, float _y);				/*!< Constructor with parameters */
+		explicit twPoint(float _value);						/*!< Constructor with one value */
 		twPoint(const twPoint& _point);						/*!< Constructor with a point */
 		twPoint();											/*!< Default constructor */
 		~twPoint();											/*!< Destructor */
@@ -56,5 +57,3 @@ namespace TwistedSDK
 		twPoint operator / (const twPoint& _point) const;
 	};
 }
-
-
